@@ -9,7 +9,7 @@ public class Tower {
     private Location location;
     private double txPower;
 
-    public Tower(Location location, double txPower) {
+    public Tower(Location location, double txPowe) {
         this.location = location;
         this.txPower = txPower;
     }
@@ -18,7 +18,7 @@ public class Tower {
         return location;
     }
 
-    public RSSI getRSSIForLocation(Location destination, double n, double noiseRatio){
+    public Telegram getRSSIForLocation(Location destination, double n, double noiseRatio){
         double distance = destination.euclideanDistanceTo(location);
         double rssiValue = txPower*10*n*Math.log10(distance);
 
@@ -28,7 +28,7 @@ public class Tower {
         double noise = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
         rssiValue += noise;
 
-        return new RSSI(rssiValue);
+        return new Telegram(rssiValue,txPower,n);
     }
 
 

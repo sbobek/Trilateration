@@ -6,6 +6,7 @@ import exceptions.WorldBuilderException;
  * Created by sbk on 23.02.17.
  */
 public class World {
+    private static final double N = 2;
     private int x, y, height, width;
     private Robot robot;
     private Tower t1, t2,t3;
@@ -19,6 +20,10 @@ public class World {
         t1 = wb.t1;
         t2 = wb.t2;
         t3 = wb.t3;
+    }
+
+    public static double getN() {
+        return N;
     }
 
     public int getX() {

@@ -9,7 +9,6 @@ import model.World;
  * Created by sbk on 23.02.17.
  */
 public class Simulator {
-    private static final double N = 2;
     private static final double NOISE_RATIO = 0.0;
     private static final long SIMULATION_RATE= 500;
 
@@ -26,9 +25,9 @@ public class Simulator {
         Tower t2 = w.getT2();
         Tower t3 = w.getT3();
         Location robotLocation = r.determineLocation(
-                t1.getRSSIForLocation(r.getRealLocation(),N,NOISE_RATIO),
-                t2.getRSSIForLocation(r.getRealLocation(),N,NOISE_RATIO),
-                t3.getRSSIForLocation(r.getRealLocation(),N,NOISE_RATIO));
+                t1.getRSSIForLocation(r.getRealLocation(),w.getN(),NOISE_RATIO),
+                t2.getRSSIForLocation(r.getRealLocation(),w.getN(),NOISE_RATIO),
+                t3.getRSSIForLocation(r.getRealLocation(),w.getN(),NOISE_RATIO));
 
         r.setCalculatedLocation(robotLocation);
     }
