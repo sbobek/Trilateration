@@ -9,7 +9,7 @@ public class Tower {
     private Location location;
     private double txPower;
 
-    public Tower(Location location, double txPowe) {
+    public Tower(Location location, double txPower) {
         this.location = location;
         this.txPower = txPower;
     }
