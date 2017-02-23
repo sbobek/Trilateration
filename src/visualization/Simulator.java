@@ -11,6 +11,7 @@ import model.World;
 public class Simulator {
     private static final double N = 2;
     private static final double NOISE_RATIO = 0.0;
+    private static final long SIMULATION_RATE= 500;
 
     private World w;
     private boolean stop = false;
@@ -45,7 +46,7 @@ public class Simulator {
         while(!isStop()){
             simulationStep();
             try {
-                Thread.sleep(1000);
+                Thread.sleep(SIMULATION_RATE);
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
