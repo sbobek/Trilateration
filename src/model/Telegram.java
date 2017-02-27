@@ -10,11 +10,13 @@ public class Telegram {
     private double rssi;
     private double txPower;
     private double n;
+    private Location towerLocation;
 
-    public Telegram(double rssi, double txPower, double n) {
+    public Telegram(double rssi, double txPower, double n, Location towerLocation) {
         this.rssi = rssi;
         this.txPower = txPower;
         this.n = n;
+        this.towerLocation = towerLocation;
     }
 
     public double getRssi() {
@@ -27,5 +29,9 @@ public class Telegram {
 
     public double getN() {
         return n;
+    }
+
+    public Location getTowerLocation() {
+        return towerLocation;
     }
 }

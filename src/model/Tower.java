@@ -8,6 +8,7 @@ import java.util.Random;
 public class Tower {
     private Location location;
     private double txPower;
+    private Telegram lastBeam;
 
     public Tower(Location location, double txPower) {
         this.location = location;
@@ -16,6 +17,14 @@ public class Tower {
 
     public Location getLocation() {
         return location;
+    }
+
+    public Telegram getLastBeam() {
+        return lastBeam;
+    }
+
+    public double getTxPower() {
+        return txPower;
     }
 
     public Telegram getRSSIForLocation(Location destination, double n, double noiseRatio){
@@ -28,7 +37,8 @@ public class Tower {
         double noise = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
         rssiValue += noise;
 
-        return new Telegram(rssiValue,txPower,n);
+        lastBeam = new Telegram(rssiValue,txPower,n, getLocation());
+        return lastBeam;
     }
 
 

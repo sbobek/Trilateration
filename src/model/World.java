@@ -7,13 +7,11 @@ import exceptions.WorldBuilderException;
  */
 public class World {
     private static final double N = 2;
-    private int x, y, height, width;
+    private int height, width;
     private Robot robot;
     private Tower t1, t2,t3;
 
     private World(WorldBuilder wb){
-        x = wb.x;
-        y = wb.y;
         height = wb.height;
         width = wb.width;
         robot = wb.robot;
@@ -26,13 +24,6 @@ public class World {
         return N;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
 
     public int getHeight() {
         return height;
@@ -59,19 +50,9 @@ public class World {
     }
 
     public static class WorldBuilder{
-        private int x, y, height, width;
+        private int height, width;
         private Robot robot;
         private Tower t1, t2,t3;
-
-        public WorldBuilder setX(int x){
-            this.x = x;
-            return this;
-        }
-
-        public WorldBuilder setY(int y) {
-            this.y = y;
-            return this;
-        }
 
         public WorldBuilder setHeight(int height) {
             this.height = height;

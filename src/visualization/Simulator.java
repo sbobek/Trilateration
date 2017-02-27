@@ -1,9 +1,6 @@
 package visualization;
 
-import model.Location;
-import model.Robot;
-import model.Tower;
-import model.World;
+import model.*;
 
 /**
  * Created by sbk on 23.02.17.
@@ -13,10 +10,12 @@ public class Simulator {
     private static final long SIMULATION_RATE= 500;
 
     private World w;
+    private Visualizer v;
     private boolean stop = false;
 
-    public Simulator(World w) {
+    public Simulator(World w, Visualizer v) {
         this.w = w;
+        this.v = v;
     }
 
     public void simulationStep(){
@@ -24,12 +23,15 @@ public class Simulator {
         Tower t1 = w.getT1();
         Tower t2 = w.getT2();
         Tower t3 = w.getT3();
-        Location robotLocation = r.determineLocation(
-                t1.getRSSIForLocation(r.getRealLocation(),w.getN(),NOISE_RATIO),
-                t2.getRSSIForLocation(r.getRealLocation(),w.getN(),NOISE_RATIO),
-                t3.getRSSIForLocation(r.getRealLocation(),w.getN(),NOISE_RATIO));
 
+        Telegram t1Beam  = t1.getRSSIForLocation(r.getRealLocation(),w.getN(),NOISE_RATIO);
+        Telegram t2Beam = t2.getRSSIForLocation(r.getRealLocation(),w.getN(),NOISE_RATIO);
+        Telegram t3Beam = t3.getRSSIForLocation(r.getRealLocation(),w.getN(),NOISE_RATIO);
+
+        Location robotLocation = r.determineLocation(t1Beam,t2Beam,t3Beam);
         r.setCalculatedLocation(robotLocation);
+
+        v.repaint();
     }
 
     public synchronized Simulator setStop(boolean stop) {
