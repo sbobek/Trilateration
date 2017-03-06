@@ -28,7 +28,8 @@ public class Robot {
     public Location determineLocation(Telegram tower1Message, Telegram tower2Message, Telegram tower3Message){
         ////////////////////////////// YOUR CODE HERE ////////////////////////////////////////
 
-        return new Location(0,0);
+
+        return new Location(100,40);
 
         /////////////////////////////////////////////////////////////////////////////////////
     }

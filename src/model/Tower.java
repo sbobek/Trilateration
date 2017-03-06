@@ -29,7 +29,7 @@ public class Tower {
 
     public Telegram getRSSIForLocation(Location destination, double n, double noiseRatio){
         double distance = destination.euclideanDistanceTo(location);
-        double rssiValue = txPower*10*n*Math.log10(distance);
+        double rssiValue = txPower-10*n*Math.log10(distance);
 
         Random r = new Random();
         double rangeMin = -noiseRatio*rssiValue;
