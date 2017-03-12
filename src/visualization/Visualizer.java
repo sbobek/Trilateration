@@ -28,8 +28,8 @@ public class Visualizer extends JFrame {
 
 
     public Visualizer(World w) throws HeadlessException, IOException {
-        robotIcon = ImageIO.read(new File("robotIcon.png"));
         robotGhostIcon = ImageIO.read(new File("robotGhostIcon.png"));
+        robotIcon = ImageIO.read(new File("robotIcon.png"));
         towerIcon = ImageIO.read(new File("towerIcon.png"));
         this.w = w;
     }
