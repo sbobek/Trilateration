@@ -29,4 +29,8 @@ public class Particle {
     public Location getLocation() {
         return location;
     }
+
+    public void setLocation(Location newLocation) {
+        this.location = newLocation;
+    }
 }

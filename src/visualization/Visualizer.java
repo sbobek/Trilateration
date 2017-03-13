@@ -53,26 +53,31 @@ public class Visualizer extends JFrame {
     }
 
     public void paintParticles(Graphics g){
+        double mult = 1;
         if(oldParticles != null){
+            mult = oldParticles.length;
             ((Graphics2D) g).setColor(this.getBackground());
             for(int i = 0; i < oldParticles.length; i++){
-                g.drawRect((int)oldParticles[i].getLocation().getX(),(int)oldParticles[i].getLocation().getY(),1,1);
+                g.fillRect((int)oldParticles[i].getLocation().getX(),(int)oldParticles[i].getLocation().getY(),1,1);
+
+
             }
         }
         ((Graphics2D) g).setColor(Color.BLACK);
         Particle[] p = w.getRobot().getMap().getParticles();
         oldParticles = p;
         for(int i = 0; i < p.length; i++){
-            g.drawRect((int)p[i].getLocation().getX(),(int)p[i].getLocation().getY(),1,1);
+            g.fillRect((int)p[i].getLocation().getX(),(int)p[i].getLocation().getY(),1,1);
+
         }
     }
 
     @Override
     public void paint(Graphics graphics) {
-        paintParticles(graphics);
         paintRobot(graphics);
         paintTowers(graphics);
         paintBeams(graphics);
+        paintParticles(graphics);
     }
 
     private synchronized void paintBeams(Graphics graphics) {
@@ -155,21 +160,7 @@ public class Visualizer extends JFrame {
             });
 
             Visualizer finalDp = dp;
-            Thread painThread = new Thread(){
-                @Override
-                public void run() {
-                    while(true) {
-                        finalDp.prepareBeams();
-                        try {
-                            Thread.sleep(5);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            };
 
-            painThread.start();
 
             s.run();
 

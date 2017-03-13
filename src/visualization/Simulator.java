@@ -6,8 +6,8 @@ import model.*;
  * Created by sbk on 23.02.17.
  */
 public class Simulator {
-    private static final double NOISE_RATIO = 0.0;
-    private static final long SIMULATION_RATE= 1000;
+    private static final double NOISE_RATIO = 0.1;
+    private static final long SIMULATION_RATE= 200;
 
     private World w;
     private Visualizer v;
