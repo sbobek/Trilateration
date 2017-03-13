@@ -25,6 +25,7 @@ public class Visualizer extends JFrame {
     double r1,r2,r3;
     World w;
     private double r1p,r2p,r3p;
+    Particle [] oldParticles;
 
 
     public Visualizer(World w) throws HeadlessException, IOException {
@@ -51,8 +52,24 @@ public class Visualizer extends JFrame {
                 (int) w.getT3().getLocation().getY(), this);
     }
 
+    public void paintParticles(Graphics g){
+        if(oldParticles != null){
+            ((Graphics2D) g).setColor(this.getBackground());
+            for(int i = 0; i < oldParticles.length; i++){
+                g.drawRect((int)oldParticles[i].getLocation().getX(),(int)oldParticles[i].getLocation().getY(),1,1);
+            }
+        }
+        ((Graphics2D) g).setColor(Color.BLACK);
+        Particle[] p = w.getRobot().getMap().getParticles();
+        oldParticles = p;
+        for(int i = 0; i < p.length; i++){
+            g.drawRect((int)p[i].getLocation().getX(),(int)p[i].getLocation().getY(),1,1);
+        }
+    }
+
     @Override
     public void paint(Graphics graphics) {
+        paintParticles(graphics);
         paintRobot(graphics);
         paintTowers(graphics);
         paintBeams(graphics);
@@ -123,6 +140,7 @@ public class Visualizer extends JFrame {
                     .setT2(new Tower(new Location(750,10),100))
                     .setT3(new Tower(new Location(638,500),100))
                     .build();
+            world.getRobot().setMap(new WorldMap(world));
             dp = new Visualizer(world);
 
             dp.setSize(world.getWidth(), world.getHeight());

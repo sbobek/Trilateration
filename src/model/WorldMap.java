@@ -1,10 +1,12 @@
 package model;
 
+import java.util.Random;
+
 /**
  * Created by sbk on 12.03.17.
  */
 public class WorldMap {
-    private static final double PARTICLE_COVERAGE = 0.8;
+    private static final double PARTICLE_COVERAGE = 0.01;
     private int maxParticles;
     private int width;
     private  int height;
@@ -20,9 +22,16 @@ public class WorldMap {
 
     public void resetParticles(){
         particles = new Particle[(int)(maxParticles*PARTICLE_COVERAGE)];
-        for(Particle p: particles){
-            p.setWeight(1/particles.length);
+
+        for(int i = 0; i < particles.length;i++){
+            Random r = new Random();
+            int x = r.nextInt(width);
+            int y = new Random().nextInt(height);
+
+            Particle p = new Particle(new Location(x,y),1.0/particles.length);
+            particles[i] = p;
         }
+
     }
 
     public Particle[] getParticles() {

@@ -12,6 +12,11 @@ public class Particle {
         this.weight = weight;
     }
 
+    public Particle(Particle particle) {
+        this.location = new Location(particle.location);
+        this.weight = particle.getWeight();
+    }
+
 
     public double getWeight() {
         return weight;

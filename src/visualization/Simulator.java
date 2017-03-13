@@ -7,7 +7,7 @@ import model.*;
  */
 public class Simulator {
     private static final double NOISE_RATIO = 0.0;
-    private static final long SIMULATION_RATE= 500;
+    private static final long SIMULATION_RATE= 1000;
 
     private World w;
     private Visualizer v;
