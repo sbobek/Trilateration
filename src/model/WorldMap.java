@@ -6,7 +6,7 @@ import java.util.Random;
  * Created by sbk on 12.03.17.
  */
 public class WorldMap {
-    private static final double PARTICLE_COVERAGE = 0.1;
+    private static final double PARTICLE_COVERAGE = 0.01;
     private int maxParticles;
     private int width;
     private  int height;

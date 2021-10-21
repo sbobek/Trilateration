@@ -7,11 +7,11 @@ import java.util.Random;
  */
 public class Robot {
 
+    private static final double TOWER_UNCERTAINTY_LEVEL = 50;
     private Location realLocation;
     private Location calculatedLocation;
     private WorldMap map;
-    private static final double MIN_RESAMPLING_NOISE =-10;
-    private static final double MAX_RESAMPLING_NOISE = 10;
+    private static final double MAX_RESAMPLING_NOISE = 20;
 
     public Robot(WorldMap map, Location realLocation) {
         this.map = map;
@@ -59,8 +59,13 @@ public class Robot {
                 if(val <= cumsum[j]){
                     newParticles[i]  = new Particle(map.getParticles()[j]);
                     Location newLocation = new Location(newParticles[i].location);
-                    double resamplingNoiseX = (MIN_RESAMPLING_NOISE + (MAX_RESAMPLING_NOISE-MIN_RESAMPLING_NOISE)*r.nextDouble());
-                    double resamplingNoiseY = (MIN_RESAMPLING_NOISE + (MAX_RESAMPLING_NOISE-MIN_RESAMPLING_NOISE)*r.nextDouble());
+
+
+                    double radius = MAX_RESAMPLING_NOISE* Math.sqrt(r.nextDouble());
+                    double theta = r.nextDouble()*2*Math.PI;
+                    double resamplingNoiseX = radius*Math.cos(theta);
+                    double resamplingNoiseY = radius*Math.sin(theta);
+
                     newLocation.setX(newLocation.getX()+resamplingNoiseX);
                     newLocation.setY(newLocation.getY()+resamplingNoiseY);
                     newParticles[i].setLocation(newLocation);
@@ -85,7 +90,7 @@ public class Robot {
             double d2 = tower2Message.getTowerLocation().euclideanDistanceTo(p.getLocation());
             double d3 = tower3Message.getTowerLocation().euclideanDistanceTo(p.getLocation());
 
-            double weight =gaussian(d1,r1,10)*gaussian(d2,r2,10)*gaussian(d3,r3,10);
+            double weight =gaussian(d1,r1,TOWER_UNCERTAINTY_LEVEL)*gaussian(d2,r2,TOWER_UNCERTAINTY_LEVEL)*gaussian(d3,r3,TOWER_UNCERTAINTY_LEVEL);
             if(Double.isNaN(weight)){
                     weight = Double.MIN_VALUE;
             }
@@ -125,22 +130,18 @@ public class Robot {
     public synchronized Location determineLocation(Telegram tower1Message, Telegram tower2Message, Telegram tower3Message){
         ////////////////////////////// YOUR CODE HERE ////////////////////////////////////////
 
-        double r1 = Math.pow(10, (tower1Message.getTxPower()-tower1Message.getRssi())/(10*tower1Message.getN()));
-        double r2 = Math.pow(10, (tower2Message.getTxPower()-tower2Message.getRssi())/(10*tower2Message.getN()));
-        double r3 = Math.pow(10, (tower3Message.getTxPower()-tower3Message.getRssi())/(10*tower3Message.getN()));
-
-        double p = tower2Message.getTowerLocation().getX();
-        double x = (r1*r1-r2*r2+p*p)/(2*p);
-        double y = Math.sqrt((r1*r1)-(x*x));
-
-        double q = tower3Message.getTowerLocation().getX();
-        double t = tower3Message.getTowerLocation().getY();
 
 
-        return new Location(0,0);
+        //weight particles
+        //resample particles
+        //find center of the clouds of particles and choose the best one for final location
+        // (it can also be a mean of all particles for simplicity)
+
 
 
         /////////////////////////////////////////////////////////////////////////////////////
+
+        return new Location(100,100);
     }
 
     public WorldMap getMap() {

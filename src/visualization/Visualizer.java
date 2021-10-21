@@ -105,7 +105,7 @@ public class Visualizer extends JFrame {
         g2.draw(e3p);
 
         if(r1p != 0) {
-            ((Graphics2D) graphics).setColor(Color.BLACK);
+            ((Graphics2D) graphics).setColor(Color.RED);
 
             Ellipse2D e1 = new Ellipse2D.Double(t1l.getX() + xAdd - r1, t1l.getY() + yAdd - r1, 2 * r1, 2 * r1);
             Ellipse2D e2 = new Ellipse2D.Double(t2l.getX() + xAdd - r2, t2l.getY() + yAdd - r2, 2 * r2, 2 * r2);
@@ -141,8 +141,8 @@ public class Visualizer extends JFrame {
                     .setHeight(600)
                     .setWidth(800)
                     .setRobot(new Robot(new Location(400,306)))
-                    .setT1(new Tower(new Location(10,10),100))
-                    .setT2(new Tower(new Location(750,10),100))
+                    .setT1(new Tower(new Location(50,50),100))
+                    .setT2(new Tower(new Location(750,50),100))
                     .setT3(new Tower(new Location(638,500),100))
                     .build();
             world.getRobot().setMap(new WorldMap(world));
@@ -159,7 +159,6 @@ public class Visualizer extends JFrame {
                 }
             });
 
-            Visualizer finalDp = dp;
 
 
             s.run();
